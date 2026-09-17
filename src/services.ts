@@ -7,18 +7,47 @@ const supabaseAnonKey=import.meta.env.VITE_SUPABASE_ANON_KEY as string|undefined
 export const supabase=(supabaseUrl&&supabaseAnonKey)?createClient(supabaseUrl,supabaseAnonKey):null;
 
 const owner=import.meta.env.VITE_GITHUB_OWNER as string|undefined;
-const repo=import.meta.env.VITE_GITHUB_REPO || 'bawolato-question-data';
+const repo=import.meta.env.VITE_GITHUB_REPO || 'data-edurujuk';
 const branch=import.meta.env.VITE_GITHUB_BRANCH || 'main';
-const path=import.meta.env.VITE_GITHUB_QUESTIONS_PATH || 'data/questions.json';
+const path=import.meta.env.VITE_GITHUB_QUESTIONS_PATH || 'questions.json';
 export const githubUrl=owner?`https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${branch}/${path.split('/').map(encodeURIComponent).join('/')}`:'';
 const CACHE_KEY='bawolato_questions_cache_v1';
 
-function validQuestion(x:unknown):x is Question { const q=x as Question; return !!q && typeof q.id==='string'&&typeof q.question==='string'&&typeof q.answer==='string'&&typeof q.active==='boolean'&&Number.isFinite(q.sort_order); }
+// Diperbarui agar lebih fleksibel membaca tipe data dari JSON GitHub
+function validQuestion(x:any): x is Question {
+  return !!x && typeof x.id === 'string' && typeof x.question === 'string' && typeof x.answer === 'string';
+}
+
 export async function fetchQuestions():Promise<{questions:Question[];source:'github'|'cache'}>{
   if(!githubUrl) throw new Error('VITE_GITHUB_OWNER belum diatur.');
-  try { const r=await fetch(githubUrl,{cache:'no-store'}); if(!r.ok) throw new Error(`GitHub HTTP ${r.status}`); const raw=await r.json(); if(!Array.isArray(raw)) throw new Error('Format questions.json harus berupa array.'); const qs=raw.filter(validQuestion).sort((a,b)=>a.sort_order-b.sort_order); if(!qs.length) throw new Error('Tidak ada pertanyaan valid.'); localStorage.setItem(CACHE_KEY,JSON.stringify(qs)); localStorage.setItem(`${CACHE_KEY}_time`,new Date().toISOString()); return {questions:qs,source:'github'}; }
-  catch(e){ const cached=localStorage.getItem(CACHE_KEY); if(cached){ const qs=JSON.parse(cached) as Question[]; return {questions:qs,source:'cache'}; } throw e; }
+  try {
+    const r=await fetch(githubUrl,{cache:'no-store'});
+    if(!r.ok) throw new Error(`GitHub HTTP ${r.status}`);
+    const raw=await r.json();
+    if(!Array.isArray(raw)) throw new Error('Format questions.json harus berupa array.');
+    
+    // Normalisasi data agar aman dari perbedaan tipe data (string/number/boolean)
+    const qs: Question[] = raw.filter(validQuestion).map((q, idx) => ({
+      ...q,
+      active: q.active === true || q.active === 'true',
+      sort_order: Number.isFinite(Number(q.sort_order)) ? Number(q.sort_order) : idx
+    })).sort((a,b)=>a.sort_order-b.sort_order);
+
+    if(!qs.length) throw new Error('Tidak ada pertanyaan valid.');
+    localStorage.setItem(CACHE_KEY,JSON.stringify(qs));
+    localStorage.setItem(`${CACHE_KEY}_time`,new Date().toISOString());
+    return {questions:qs,source:'github'};
+  }
+  catch(e){
+    const cached=localStorage.getItem(CACHE_KEY);
+    if(cached){
+      const qs=JSON.parse(cached) as Question[];
+      return {questions:qs,source:'cache'};
+    }
+    throw e;
+  }
 }
+
 export function cachedQuestions():Question[]{try{return JSON.parse(localStorage.getItem(CACHE_KEY)||'[]') as Question[]}catch{return[]}}
 export function cacheTime(){return localStorage.getItem(`${CACHE_KEY}_time`)}
 
