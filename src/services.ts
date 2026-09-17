@@ -28,7 +28,7 @@ export async function fetchQuestions(): Promise<{ questions: Question[]; source:
     const qs: Question[] = raw.filter(validQuestion).map((q: any, idx: number) => ({
       ...q,
       id: String(q.id),
-      active: q.active === true || q.active === "true", // Menangani boolean atau string "true"
+      active: q.active === true || q.active === "true", // <-- Ubah ke baris ini
       sort_order: Number.isFinite(Number(q.sort_order)) ? Number(q.sort_order) : idx
     })).sort((a, b) => a.sort_order - b.sort_order);
 
