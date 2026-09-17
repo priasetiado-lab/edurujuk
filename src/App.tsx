@@ -49,4 +49,36 @@ function AdminSettings(){const {sync,reload}=useAdmin();const [profile,setProfil
 function Empty({text}:{text:string}){return <div className="bg-white border rounded-2xl p-10 text-center text-slate-500">{text}</div>}
 function AdminLogin(){const nav=useNavigate();const [email,setEmail]=useState('');const [password,setPassword]=useState('');const [busy,setBusy]=useState(false);const [error,setError]=useState('');const submit=async(e:React.FormEvent)=>{e.preventDefault();setBusy(true);setError('');try{const u=await signIn(email,password);if(!u)throw new Error();const p=await getProfile(u.id);if(p?.role!=='admin'){await signOut();throw new Error('Akun ini tidak memiliki akses admin.')}nav('/admin')}catch(e:any){setError(e?.message||'Login gagal.')}finally{setBusy(false)}};return <div className="max-w-sm mx-auto mt-10"><div className="bg-white border rounded-3xl shadow-sm p-8"><div className="flex justify-center"><div className="bg-emerald-100 p-4 rounded-full text-emerald-600"><Shield size={32}/></div></div><h2 className="text-2xl font-bold text-center mt-5">Masuk Admin</h2><p className="text-sm text-slate-500 text-center mt-2">Gunakan email dan password akun Supabase Auth.</p>{error&&<div className="mt-5 p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>}<form onSubmit={submit} className="space-y-4 mt-5"><div><label className="text-sm font-medium">Email</label><input type="email" required value={email} onChange={e=>setEmail(e.target.value)} className="w-full mt-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500"/></div><div><label className="text-sm font-medium">Password</label><input type="password" required value={password} onChange={e=>setPassword(e.target.value)} className="w-full mt-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500"/></div><button disabled={busy} className="w-full py-3 bg-slate-800 text-white rounded-xl disabled:opacity-60">{busy?'Memeriksa...':'Masuk'}</button></form></div></div>}
 
-export default function App(){return <Routes><Route element={<PublicLayout><Routes><Route path="/" element={<PublicHome/>}/><Route path="/pertanyaan-manual" element={<ManualPage/>}/><Route path="/kritik-saran" element={<FeedbackPage/>}/><Route path="/call-center" element={<CallCenter/>}/><Route path="*" element={<Navigate to="/" replace/>}/></Routes></PublicLayout>}><Route path="/*" element={<></>}/></Route><Route path="/admin/login" element={<AdminLogin/>}/><Route path="/admin/*" element={<AdminGuard><AdminLayout><Routes><Route path="" element={<AdminDashboard/>}/><Route path="inbox" element={<AdminInbox/>}/><Route path="riwayat" element={<AdminHistory/>}/><Route path="pertanyaan" element={<AdminQuestions/>}/><Route path="call-center" element={<AdminCall/>}/><Route path="pengaturan" element={<AdminSettings/>}/><Route path="*" element={<Navigate to="/admin" replace/>}/></Routes></AdminLayout></AdminGuard>}/></Routes>}
+export default function App(){
+  return (
+    <Routes>
+      <Route path="/*" element={
+        <PublicLayout>
+          <Routes>
+            <Route index element={<PublicHome />} />
+            <Route path="pertanyaan-manual" element={<ManualPage />} />
+            <Route path="kritik-saran" element={<FeedbackPage />} />
+            <Route path="call-center" element={<CallCenter />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </PublicLayout>
+      } />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/*" element={
+        <AdminGuard>
+          <AdminLayout>
+            <Routes>
+              <Route index element={<AdminDashboard />} />
+              <Route path="inbox" element={<AdminInbox />} />
+              <Route path="riwayat" element={<AdminHistory />} />
+              <Route path="pertanyaan" element={<AdminQuestions />} />
+              <Route path="call-center" element={<AdminCall />} />
+              <Route path="pengaturan" element={<AdminSettings />} />
+              <Route path="*" element={<Navigate to="/admin" replace />} />
+            </Routes>
+          </AdminLayout>
+        </AdminGuard>
+      } />
+    </Routes>
+  );
+}
