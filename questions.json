@@ -1,0 +1,149 @@
+[
+  {
+    "id": "Q001",
+    "category": "Pelayanan",
+    "question": "Apa saja jam pelayanan UPTD Puskesmas Bawolato?",
+    "answer": "Informasi jam pelayanan mengikuti jadwal pelayanan yang berlaku.",
+    "active": true,
+    "sort_order": 1
+  },
+  {
+    "id": "Q002",
+    "category": "Pendaftaran",
+    "question": "Apa syarat pendaftaran pasien baru?",
+    "answer": "Silakan membawa dokumen identitas dan dokumen jaminan kesehatan sesuai ketentuan pelayanan yang berlaku.",
+    "active": true,
+    "sort_order": 2
+  },
+{
+    "id": "Q003",
+    "category": "pelayanan rujukan",
+    "question": "Kenapa pasien harus dirujuk?"
+    "answer": "Pasien perlu dirujuk apabila membutuhkan pemeriksaan, tindakan, atau pelayanan kesehatan lanjutan yang sesuai dengan kondisi medisnya dan tidak dapat diberikan secara optimal di fasilitas pelayanan kesehatan sebelumnya.",
+    "active": true,
+    "sort_order": 3
+  },
+{
+    "id": "Q004",
+    "category": "rujukan",
+    "question":"Apakah pasien tidak bisa ditangani di Puskesmas?",
+    "answer": "Puskesmas tetap memberikan penanganan awal sesuai kondisi pasien. Jika diperlukan pelayanan lebih lanjut, pasien akan dirujuk ke fasilitas kesehatan yang sesuai.",
+    "active": true,
+    "sort_order": 4
+},
+  {
+"id": "Q005",
+    "category": "rujukan",
+    "question": "Apakah rujukan berarti kondisi pasien sangat parah?",
+    "answer": " Tidak selalu. Rujukan dilakukan berdasarkan kebutuhan medis pasien agar mendapatkan pelayanan yang paling sesuai dan aman.",
+    "active": true,
+    "sort_order": 5
+  },
+  {
+    "id": "Q006",
+    "category": "rujukan",
+    "question": "Mengapa harus segera dirujuk?",
+    "answer": "Pada kondisi tertentu, rujukan perlu dilakukan segera untuk mencegah kondisi pasien memburuk dan mempercepat mendapatkan penanganan yang dibutuhkan.",
+    "active": true,
+    "sort_order": 6
+  },
+{
+  
+    "id": "Q007",
+    "category": "rujukan",
+    "question": "Bolehkah kami menunda keberangkatan?",
+    "answer": " Jika petugas merekomendasikan rujukan segera, sebaiknya tidak ditunda tanpa alasan yang jelas karena keterlambatan dapat meningkatkan risiko pada pasien.",
+    "active": true,
+    "sort_order": 7
+  },
+{
+"id": "Q008",
+    "category": "rujukan",
+    "question": "Apa manfaat pasien dirujuk?",
+    "answer": " Rujukan bertujuan agar pasien memperoleh pemeriksaan dan pengobatan yang lebih lengkap, tindakan lanjutan, serta meningkatkan keselamatan dan peluang pemulihan pasien.",
+    "active": true,
+    "sort_order": 8
+  },
+{
+"id": "Q009",
+    "category": "rujukan",
+    "question": "Apa yang harus kami lakukan sebelum berangkat?",
+    "answer": " Ikuti arahan petugas, siapkan dokumen yang diperlukan, obat atau informasi pengobatan bila ada, serta persiapkan pendamping dan transportasi sesuai kondisi pasien.",
+    "active": true,
+    "sort_order": 9
+  },
+{
+
+"id": "Q0010",
+    "category": "rujukan",
+    "question":"Apakah pasien bisa menggunakan ambulans?",
+    "answer": " Ambulans dapat digunakan sesuai kebutuhan dan kondisi pasien berdasarkan arahan petugas serta ketersediaan layanan transportasi kesehatan.",
+    "active": true,
+    "sort_order": 10
+  },
+{
+"id": "Q0011",
+    "category": "rujukan",
+    "question":"Siapa yang harus mendampingi pasien?",
+    "answer": " Pasien sebaiknya didampingi keluarga atau pendamping yang ditentukan sesuai kondisi pasien dan arahan petugas kesehatan.",
+    "active": true,
+    "sort_order": 11
+  },
+{
+"id": "Q0012",
+    "category": "rujukan",
+    "question":"Dokumen apa yang harus dibawa?",
+    "answer": " Bawa dokumen atau surat rujukan dan dokumen pelayanan kesehatan yang diperlukan sesuai arahan petugas.",
+    "active": true,
+    "sort_order": 12
+  },
+{
+"id": "Q0013",
+    "category": "rujukan",
+    "question":"Kenapa harus ke fasilitas kesehatan tersebut?",
+    "answer": " Fasilitas tujuan dipilih sesuai kebutuhan pelayanan pasien agar pasien mendapatkan pemeriksaan atau tindakan yang diperlukan.",
+    "active": true,
+    "sort_order": 13
+  },
+{
+
+"id": "Q0014",
+    "category": "rujukan",
+    "question":"Kalau kami tidak mau dirujuk bagaimana?",
+    "answer": " Petugas akan menjelaskan kembali alasan, manfaat, risiko, dan pentingnya rujukan sehingga pasien atau keluarga dapat memahami keputusan yang harus diambil.",
+    "active": true,
+    "sort_order": 14
+  },
+{
+"id": "Q0015",
+    "category": "rujukan",
+    "question":"Kami takut pasien semakin parah kalau dibawa?",
+    "answer": " Justru rujukan dilakukan untuk mendapatkan penanganan yang sesuai. Petugas akan mempersiapkan dan mendampingi proses rujukan sesuai kondisi pasien.",
+    "active": true,
+    "sort_order": 15
+  },
+{
+
+"id": "Q0016",
+    "category": "rujukan",
+    "question":"Apakah setelah sampai rumah sakit pasien langsung ditangani?",
+    "answer": " Pasien akan mendapatkan pelayanan di fasilitas tujuan sesuai kondisi dan kebutuhan medisnya berdasarkan proses pelayanan yang berlaku di fasilitas tersebut.",
+    "active": true,
+    "sort_order": 16
+  },
+{
+
+"id": "Q0017",
+    "category": "rujukan",
+    "question":"Kalau sudah membaik, apakah harus kembali ke Puskesmas?",
+    "answer": " Tindak lanjut dilakukan sesuai kondisi pasien dan arahan fasilitas kesehatan. Dalam kondisi tertentu dapat dilakukan rujuk balik untuk melanjutkan pelayanan di fasilitas sebelumnya.",
+    "active": true,
+    "sort_order": 17
+  },
+]
+
+
+
+
+
+
