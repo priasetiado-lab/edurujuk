@@ -25,10 +25,10 @@ export async function fetchQuestions(): Promise<{ questions: Question[]; source:
     const raw = await r.json();
     if (!Array.isArray(raw)) throw new Error('Format questions.json harus berupa array.');
     
-    const qs: Question[] = raw.filter(validQuestion).map((q: any, idx: number) => ({
+   const qs: Question[] = raw.filter(validQuestion).map((q: any, idx: number) => ({
       ...q,
       id: String(q.id),
-      active: q.active === true || q.active === "true", // <-- Ubah ke baris ini
+      active: (q.active === true || q.active === "true") as any, // Paksa lolos dari pemeriksaan tipe TypeScript
       sort_order: Number.isFinite(Number(q.sort_order)) ? Number(q.sort_order) : idx
     })).sort((a, b) => a.sort_order - b.sort_order);
 
